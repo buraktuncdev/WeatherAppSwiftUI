@@ -21,9 +21,9 @@ struct ForecastView: View {
                                startPoint: .topLeading, endPoint: .bottomTrailing)
                 .edgesIgnoringSafeArea(.all)
 
-                VStack(spacing: 20) {
+                VStack(spacing: 10) {
                     TodayCardView(cityArea: locationViewModel.userCurrentPlacemark?.subAdministrativeArea ?? "",
-                                  todayWeatherIcon: forecastViewModel.todayWeatherIcon,
+                                  todayWeatherAnimation: forecastViewModel.todayWeatherAnimationIcon,
                                   currentTemperature: forecastViewModel.currentTemperature,
                                   currentTime: forecastViewModel.currentTime)
                     Spacer()
@@ -39,8 +39,8 @@ struct ForecastView: View {
                                 HStack {
                                     ForEach(0..<24) { index in
                                         HourlyCardView(hourOfDay: forecastViewModel.hourlyForecastHours[index],
-                                                      iconName: forecastViewModel.hourlyIcons[index],
-                                                      temperatureHigh: forecastViewModel.hourlyForecastTemperatures[index])
+                                                       iconName: forecastViewModel.hourlyIcons[index],
+                                                       temperatureHigh: forecastViewModel.hourlyForecastTemperatures[index])
                                     }.padding(.horizontal, 8)
                                 }
                             }
@@ -50,15 +50,14 @@ struct ForecastView: View {
                 }
 
             }
-            .onAppear {
-                if let userCurrentLocation = locationViewModel.userCurrentLocation {
+            .onReceive(locationViewModel.$userCurrentLocation) {
+                if let userCurrentLocation = $0 {
                     Logger.shared.log(.success, "user location is: \(userCurrentLocation)")
                     forecastViewModel.getForecastData(latitude:  userCurrentLocation.coordinate.latitude, longitude: userCurrentLocation.coordinate.longitude)
                 } else {
                     Logger.shared.log(.error, "user location cannot be accessible")
-//                    forecastViewModel.getForecastData(latitude:  59.337239, longitude: 18.062381)
+                    forecastViewModel.getForecastData(latitude:  59.337239, longitude: 18.062381)
                 }
-
             }
         }
     }
