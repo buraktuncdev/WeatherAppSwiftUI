@@ -12,10 +12,10 @@ import WeatherAppLogger
 
 final class ForecastViewModel: ObservableObject {
 
-    @Published var city: String = "San Francisco"
+    @Published var city: String = "Amsterdam"
     @Published var currentTime: String = ""
     @Published var timezone: String = ""
-    @Published var todayWeatherIcon: String = ""
+    @Published var todayWeatherAnimationIcon: String = ""
 
     @Published var hourlyIcons: [String] = []
     @Published var hourlyForecastTemperatures: [String] = []
@@ -43,7 +43,7 @@ final class ForecastViewModel: ObservableObject {
                     // TODO: ALERT
                 case .success(let forecastData):
                     self.currentTime = DateFormatter.convertUnixToDayAndMonthString(time: forecastData.currently.time, timezone: forecastData.timezone)
-                    self.todayWeatherIcon = self.getWeatherIcon(iconName: forecastData.currently.icon)
+                    self.todayWeatherAnimationIcon = self.getAnimation(iconName: forecastData.currently.icon)
                     self.currentTemperature = self.getTemperatureAsCelcius(temp: forecastData.currently.temperature)
                     self.windSpeed = String(format: "%.1f", forecastData.currently.windSpeed)
                     self.humidity = String(format: "%.0f%%", forecastData.currently.humidity * 100)
@@ -54,8 +54,6 @@ final class ForecastViewModel: ObservableObject {
             }
         }
     }
-
-
 
     private func setHourlyForecastsViewData(hourlyForecastDataArray: [HourlyForecast], timeZone: String) {
         hourlyForecastDataArray.forEach { hourlyForecast in
@@ -83,6 +81,27 @@ final class ForecastViewModel: ObservableObject {
             return "cloud.snow.fill"
         default:
             return "sun.max.fill"
+        }
+    }
+
+    private func getAnimation(iconName: String) -> String {
+        switch iconName {
+        case "clear-day":
+            return "DayClearSky"
+        case "clear-night":
+            return "NightClearSky"
+        case "cloudy":
+            return "DayCloudy"
+        case "partly-cloudy-day":
+            return "DayPartlyCloudy"
+        case "partly-cloudy-night":
+            return "NightPartlyCloudy"
+        case "rain":
+            return "DayRainy"
+        case "snow":
+            return "DaySnow"
+        default:
+            return "DayClearSky"
         }
     }
 
