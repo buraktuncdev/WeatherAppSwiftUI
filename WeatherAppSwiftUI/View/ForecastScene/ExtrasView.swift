@@ -8,6 +8,11 @@
 import SwiftUI
 
 struct ExtrasView: View {
+
+    var windSpeed: String
+    var humidity: String
+    var visibility: String
+
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 10, style: .continuous)
@@ -21,7 +26,7 @@ struct ExtrasView: View {
                         .frame(width: 24, height: 24)
                         .aspectRatio(contentMode: .fit)
                         .foregroundColor(ColorConstants.waLabelColor)
-                    Text("8km/h")
+                    Text("\(windSpeed)km/h")
                         .fontWeight(.bold)
                         .foregroundColor(ColorConstants.waLabelColor)
                     Text("Wind Speed")
@@ -35,7 +40,7 @@ struct ExtrasView: View {
                         .frame(width: 26, height: 20)
                         .aspectRatio(contentMode: .fit)
                         .foregroundColor(ColorConstants.waLabelColor)
-                    Text("47%")
+                    Text(humidity)
                         .fontWeight(.bold)
                         .foregroundColor(ColorConstants.waLabelColor)
                     Text("Humidity")
@@ -49,7 +54,7 @@ struct ExtrasView: View {
                         .frame(width: 26, height: 20)
                         .aspectRatio(contentMode: .fit)
                         .foregroundColor(ColorConstants.waLabelColor)
-                    Text("1.4km")
+                    Text(visibility)
                         .fontWeight(.bold)
                         .foregroundColor(ColorConstants.waLabelColor)
                     Text("Visibility")
