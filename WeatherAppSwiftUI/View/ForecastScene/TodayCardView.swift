@@ -9,16 +9,19 @@ import SwiftUI
 
 struct TodayCardView: View {
 
+    var cityArea: String
     var todayWeatherIcon: String
     var currentTemperature: String
     var currentTime: String
 
+
     var body: some View {
         VStack {
-            Text("Amsterdam".capitalized)
+            Text(cityArea.capitalized)
                 .font(.system(size: 32))
                 .fontWeight(.heavy)
                 .foregroundColor(ColorConstants.waLabelColor)
+                .lineLimit(2)
             Text(currentTime)
                 .font(.system(size: 18))
                 .fontWeight(.medium)
@@ -33,6 +36,6 @@ struct TodayCardView: View {
                 .fontWeight(.bold)
                 .foregroundColor(ColorConstants.waLabelColor)
         }
-        .frame(width: UIScreen.main.bounds.width / 1.5, height: UIScreen.main.bounds.width / 2)
+        .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
     }
 }

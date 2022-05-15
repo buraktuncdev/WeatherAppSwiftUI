@@ -32,9 +32,9 @@ final class ForecastViewModel: ObservableObject {
 
     // TODO: AlertItem, Loading View
 
-    func getForecastData() {
+    func getForecastData(latitude: Double, longitude: Double) {
         self.isLoaded = false
-        ForecastService.shared.fetchWeatherData(latitude: 59.337239, longitude: 18.062381) { [self] result in
+        ForecastService.shared.fetchWeatherData(latitude: latitude, longitude: longitude) { [self] result in
             DispatchQueue.main.async {
                 self.isLoaded = true
                 switch result {
@@ -45,12 +45,11 @@ final class ForecastViewModel: ObservableObject {
                     self.currentTime = DateFormatter.convertUnixToDayAndMonthString(time: forecastData.currently.time, timezone: forecastData.timezone)
                     self.todayWeatherIcon = self.getWeatherIcon(iconName: forecastData.currently.icon)
                     self.currentTemperature = self.getTemperatureAsCelcius(temp: forecastData.currently.temperature)
-                    self.windSpeed = String(format: "%0.1f", forecastData.currently.windSpeed)
-                    self.humidity = String(format: "%d%%", forecastData.currently.humidity)
-                    self.visibility = "\(forecastData.currently.visibility) km"
+                    self.windSpeed = String(format: "%.1f", forecastData.currently.windSpeed)
+                    self.humidity = String(format: "%.0f%%", forecastData.currently.humidity * 100)
+                    self.visibility = String(format: "%.1f%km", forecastData.currently.visibility)
 
                     self.setHourlyForecastsViewData(hourlyForecastDataArray: forecastData.hourly.data, timeZone: forecastData.timezone)
-
                 }
             }
         }
