@@ -22,15 +22,18 @@ public final class ForecastService: ForecastServiceProtocol {
     static let shared: ForecastService = ForecastService()
 
     func fetchWeatherData(latitude: Double, longitude: Double, completion: @escaping (Result<Forecast, APIError>) -> Void) {
-        let forecastURLString = apiPaths.createForecastURL(apiKey: Constants.apiKey, latitude: 59.337239, longitude: 18.062381)
-//        let forecastURLString = apiPaths.createForecastURL(apiKey: Constants.apiKey, latitude: 38.16, longitude: 31.59)
+        guard let apiKey = Bundle.main.infoDictionary?["WEATHER_API_KEY"] as? String else {
+            Logger.shared.log(.error, "API KEY NOT FOUND")
+            return
+        }
+        let forecastURLString = apiPaths.createForecastURL(apiKey: apiKey, latitude: latitude, longitude: longitude)
         let url = URL(string: forecastURLString)
         guard let url = url else { return }
         var urlRequest = URLRequest(url: url)
         urlRequest = apiHelper.setRequestHeaders(request: &urlRequest, headers: ["Content-Type": "application/json"])
         urlRequest = apiHelper.setRequestHttpMethod(request: &urlRequest, httpMethod: .GET)
 
-        apiManager.callAPI(urlRequest: urlRequest, requestBody: nil, expectingReturnType: Forecast.self) { result in // TODO: can be removed expecting return type
+        apiManager.callAPI(urlRequest: urlRequest, requestBody: nil, expectingReturnType: Forecast.self) { result in
             switch result {
             case .failure(let error):
                 Logger.shared.log(.error, error.localizedDescription)

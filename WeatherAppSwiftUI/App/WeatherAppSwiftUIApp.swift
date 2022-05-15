@@ -12,7 +12,7 @@ struct WeatherAppSwiftUIApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ForecastView()
+            ForecastView(viewModel: ForecastViewModel())
         }
     }
 }
