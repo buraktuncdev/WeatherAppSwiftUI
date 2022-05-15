@@ -1,0 +1,23 @@
+{
+  "pins" : [
+    {
+      "identity" : "weatherapplogger",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/buraktuncdev/WeatherAppLogger.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "26b06a41fd8e2fc2021238f507579d7cf0ffa5b5"
+      }
+    },
+    {
+      "identity" : "weatherappnetwork",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/buraktuncdev/WeatherAppNetwork.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "7360a1e545c91235619cfa284a405bb815678164"
+      }
+    }
+  ],
+  "version" : 2
+}
