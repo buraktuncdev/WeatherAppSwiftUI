@@ -21,21 +21,21 @@ struct ExtrasView: View {
                                                    startPoint: .topLeading, endPoint: .bottomTrailing))
             HStack(spacing: 48) {
                 VStack(spacing: 8) {
-                    Image(systemName: "wind")
+                    Image(systemName: Constants.ExtrasView.windSpeedIcon)
                         .resizable()
                         .frame(width: 24, height: 24)
                         .aspectRatio(contentMode: .fit)
                         .foregroundColor(ColorConstants.waLabelColor)
-                    Text("\(windSpeed)km/h")
+                    Text("\(windSpeed)\(Constants.ExtrasView.windSpeedType)")
                         .fontWeight(.bold)
                         .foregroundColor(ColorConstants.waLabelColor)
-                    Text("Wind Speed")
+                    Text(Constants.ExtrasView.windSpeedTitle)
                         .fontWeight(.regular)
                         .foregroundColor(ColorConstants.waLabelColor)
                 }
 
                 VStack(spacing: 8) {
-                    Image(systemName: "humidity")
+                    Image(systemName: Constants.ExtrasView.humidityIcon)
                         .resizable()
                         .frame(width: 26, height: 20)
                         .aspectRatio(contentMode: .fit)
@@ -43,13 +43,13 @@ struct ExtrasView: View {
                     Text(humidity)
                         .fontWeight(.bold)
                         .foregroundColor(ColorConstants.waLabelColor)
-                    Text("Humidity")
+                    Text(Constants.ExtrasView.humidityTitle)
                         .fontWeight(.regular)
                         .foregroundColor(ColorConstants.waLabelColor)
                 }
 
                 VStack(spacing: 8) {
-                    Image(systemName: "eye")
+                    Image(systemName: Constants.ExtrasView.visibilityIcon)
                         .resizable()
                         .frame(width: 26, height: 20)
                         .aspectRatio(contentMode: .fit)
@@ -57,7 +57,7 @@ struct ExtrasView: View {
                     Text(visibility)
                         .fontWeight(.bold)
                         .foregroundColor(ColorConstants.waLabelColor)
-                    Text("Visibility")
+                    Text(Constants.ExtrasView.visibilityTitle)
                         .fontWeight(.regular)
                         .foregroundColor(ColorConstants.waLabelColor)
                 }
@@ -65,6 +65,5 @@ struct ExtrasView: View {
         }
         .frame(width: UIScreen.main.bounds.width / 1.1, height: UIScreen.main.bounds.width / 4)
         .cornerRadius(10)
-
     }
 }

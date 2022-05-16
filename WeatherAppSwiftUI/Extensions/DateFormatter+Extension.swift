@@ -12,7 +12,7 @@ extension DateFormatter {
     static func convertUnixToDayAndMonthString(time: Int, timezone: String) -> String {
         let date = Date(timeIntervalSince1970: TimeInterval(time))
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "E, d MMM"
+        dateFormatter.dateFormat = Constants.DateFormatter.dayAndMonthFormat
         dateFormatter.timeZone = TimeZone(identifier: timezone)
         let localDate = dateFormatter.string(from: date)
         return localDate
@@ -21,7 +21,7 @@ extension DateFormatter {
     static func convertUnixToHour(time: Int, timezone: String) -> String {
         let date = Date(timeIntervalSince1970: TimeInterval(time))
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "h:mm a"
+        dateFormatter.dateFormat = Constants.DateFormatter.hourFormat
         dateFormatter.timeZone = TimeZone(identifier: timezone)
         let localDate = dateFormatter.string(from: date)
         return localDate
