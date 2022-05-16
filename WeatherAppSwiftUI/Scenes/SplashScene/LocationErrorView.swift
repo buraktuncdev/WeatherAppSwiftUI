@@ -9,7 +9,7 @@ import SwiftUI
 
 struct LocationErrorView: View {
 
-    @StateObject var forecastViewModel = ForecastViewModel()
+    @StateObject var forecastViewModel = ForecastViewModel(forecastService: ForecastService())
     @StateObject var locationViewModel = LocationViewModel()
 
     @State var isActiveSecondView: Bool

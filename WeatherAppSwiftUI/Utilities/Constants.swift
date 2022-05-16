@@ -28,6 +28,31 @@ struct Constants {
         static let apiKeyNotFound = "API key not found in config"
         static let contentTypeHeader = ["Content-Type": "application/json"]
         static let fetchSuccessfullMessage = "Successfully Fetched Weather Data"
+        
+        static let clearDayIconName = "clear-day"
+        static let clearNightIconName = "clear-night"
+        static let cloudyIconName = "cloudy"
+        static let partlyCloudyDayIconName = "partly-cloudy-day"
+        static let partlyCloudyNightIconName = "partly-cloudy-night"
+        static let rainIconName = "rain"
+        static let snowIconName = "snow"
+
+        static let clearDayWeatherIconName = "sun.max.fill"
+        static let clearNightWeatherIconName = "moon.fill"
+        static let cloudyWeatherIconName = "cloud.fill"
+        static let partlyCloudyDayWeatherIconName = "cloud.sun.fill"
+        static let partlyCloudyNightWeatherIconName = "cloud.moon.fill"
+        static let rainWeatherIconName = "cloud.drizzle.fill"
+        static let snowWeatherIconName = "cloud.snow.fill"
+
+        static let clearDayAnimationName = "DayClearSky"
+        static let clearNightAnimationName = "NightClearSky"
+        static let cloudyAnimationName = "DayCloudy"
+        static let partlyCloudyDayAnimationName = "DayPartlyCloudy"
+        static let partlyCloudyNightAnimationName = "NightPartlyCloudy"
+        static let rainAnimationName = "DayRainy"
+        static let snowAnimationName = "DaySnow"
+
     }
 
     // MARK: LocationErrorView
@@ -53,35 +78,6 @@ struct Constants {
         static let serviceErrorText = "Please check your internet connection or contact our team"
         static let serviceErrorTitle = "Service Error"
         static let alertActionTitle = "Try Again"
-    }
-
-    // MARK: ForecastViewModel
-    struct ForecastViewModel {
-        static let clearDayIconName = "clear-day"
-        static let clearNightIconName = "clear-night"
-        static let cloudyIconName = "cloudy"
-        static let partlyCloudyDayIconName = "partly-cloudy-day"
-        static let partlyCloudyNightIconName = "partly-cloudy-night"
-        static let rainIconName = "rain"
-        static let snowIconName = "snow"
-
-        static let clearDayWeatherIconName = "sun.max.fill"
-        static let clearNightWeatherIconName = "moon.fill"
-        static let cloudyWeatherIconName = "cloud.fill"
-        static let partlyCloudyDayWeatherIconName = "cloud.sun.fill"
-        static let partlyCloudyNightWeatherIconName = "cloud.moon.fill"
-        static let rainWeatherIconName = "cloud.drizzle.fill"
-        static let snowWeatherIconName = "cloud.snow.fill"
-
-        static let clearDayAnimationName = "DayClearSky"
-        static let clearNightAnimationName = "NightClearSky"
-        static let cloudyAnimationName = "DayCloudy"
-        static let partlyCloudyDayAnimationName = "DayPartlyCloudy"
-        static let partlyCloudyNightAnimationName = "NightPartlyCloudy"
-        static let rainAnimationName = "DayRainy"
-        static let snowAnimationName = "DaySnow"
-
-        
     }
 
 }
