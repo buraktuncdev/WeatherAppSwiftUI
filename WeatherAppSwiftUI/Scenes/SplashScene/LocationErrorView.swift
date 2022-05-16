@@ -25,7 +25,7 @@ struct LocationErrorView: View {
                 .edgesIgnoringSafeArea(.all)
 
                 VStack(spacing: 16) {
-                    Image(systemName: "gear")
+                    Image(systemName: Constants.LocationErrorView.iconNameForErrorMessage)
                         .resizable()
                         .foregroundColor(Color.red)
                         .frame(width: 80, height: 80, alignment: .center)
@@ -38,7 +38,7 @@ struct LocationErrorView: View {
                     Button(action: {
                         self.isActiveSecondView = true
                     }, label: {
-                        Label("Use Without Location", systemImage: "cloud.drizzle.fill")
+                        Label(Constants.LocationErrorView.segueButtonLabel, systemImage: Constants.LocationErrorView.segueButtonIcon)
                     })
                     .padding(10)
                     .foregroundColor(.white)

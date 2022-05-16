@@ -20,10 +20,10 @@ struct WeatherAppSwiftUIApp: App {
                     .environmentObject(locationViewModel)
             case .restricted:
                 LocationErrorView(isActiveSecondView: false,
-                          errorMessage: "Permission of location usage is restricted.")
+                                  errorMessage: Constants.WeatherAppSwiftUIApp.locationRestrictedMessage)
             case .denied:
                 LocationErrorView(isActiveSecondView: false,
-                          errorMessage: "Our application does not have location permissions. Please enable it in settings.")
+                                  errorMessage: Constants.WeatherAppSwiftUIApp.licationDeniedMessage)
             case .authorizedAlways, .authorizedWhenInUse:
                 ForecastView(forecastViewModel: forecastViewModel)
                     .environmentObject(locationViewModel)
