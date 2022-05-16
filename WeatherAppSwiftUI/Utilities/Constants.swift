@@ -48,6 +48,14 @@ struct Constants {
         static let visibilityTitle = "Visibility"
     }
 
+    // MARK: ForecastView
+    struct ForecastView {
+        static let serviceErrorText = "Please check your internet connection or contact our team"
+        static let serviceErrorTitle = "Service Error"
+        static let alertActionTitle = "Try Again"
+    }
+
+    // MARK: ForecastViewModel
     struct ForecastViewModel {
         static let clearDayIconName = "clear-day"
         static let clearNightIconName = "clear-night"

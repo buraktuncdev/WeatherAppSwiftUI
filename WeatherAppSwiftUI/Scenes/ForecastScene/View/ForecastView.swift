@@ -13,6 +13,9 @@ struct ForecastView: View {
     @EnvironmentObject var locationViewModel: LocationViewModel
     @ObservedObject var forecastViewModel: ForecastViewModel = ForecastViewModel()
     @State var isLoading = true
+    @State var hasServiceError = false
+    @State var userCurrentLatitude: Double = 0.0
+    @State var userCurrentLongitude: Double = 0.0
     
     var body: some View {
         NavigationView {
@@ -23,19 +26,19 @@ struct ForecastView: View {
                 .edgesIgnoringSafeArea(.all)
                 
                 VStack(spacing: 10) {
-                    if forecastViewModel.isLoaded {
-                        TodayCardView(cityArea: locationViewModel.userCurrentPlacemark?.subAdministrativeArea ?? "",
-                                      todayWeatherAnimation: forecastViewModel.todayWeatherAnimationIcon,
-                                      currentTemperature: forecastViewModel.currentTemperature,
-                                      currentTime: forecastViewModel.currentTime)
-                        Spacer()
-                        ExtrasView(windSpeed: forecastViewModel.windSpeed,
-                                   humidity: forecastViewModel.humidity,
-                                   visibility: forecastViewModel.visibility)
-                        Spacer()
-                        VStack {
-                            ScrollView(.horizontal, showsIndicators: false) {
-                                if(forecastViewModel.isLoaded) {
+                    if(!hasServiceError) {
+                        if forecastViewModel.isLoaded {
+                            TodayCardView(cityArea: locationViewModel.userCurrentPlacemark?.subAdministrativeArea ?? "",
+                                          todayWeatherAnimation: forecastViewModel.todayWeatherAnimationIcon,
+                                          currentTemperature: forecastViewModel.currentTemperature,
+                                          currentTime: forecastViewModel.currentTime)
+                            Spacer()
+                            ExtrasView(windSpeed: forecastViewModel.windSpeed,
+                                       humidity: forecastViewModel.humidity,
+                                       visibility: forecastViewModel.visibility)
+                            Spacer()
+                            VStack {
+                                ScrollView(.horizontal, showsIndicators: false) {
                                     HStack {
                                         ForEach(0..<24) { index in
                                             HourlyCardView(hourOfDay: forecastViewModel.hourlyForecastHours[index],
@@ -45,23 +48,36 @@ struct ForecastView: View {
                                     }
                                 }
                             }
+                            .padding(.bottom)
+                        } else {
+                            LoadingView(isLoading: $isLoading)
                         }
-                        .padding(.bottom)
                     } else {
-                        LoadingView(isLoading: $isLoading)
+                        VStack {
+                            Text(Constants.ForecastView.serviceErrorText)
+                            Spacer()
+                        }.alert(isPresented: $hasServiceError) {
+                            Alert(title: Text(Constants.ForecastView.serviceErrorTitle), message: Text(forecastViewModel.serviceErrorMessage), dismissButton: .default(Text(Constants.ForecastView.alertActionTitle), action: {
+                                forecastViewModel.getForecastData(latitude:  self.userCurrentLatitude, longitude: self.userCurrentLongitude)
+                            }))
+                        }
                     }
                 }
                 .onReceive(locationViewModel.$userCurrentLocation) {
                     if let userCurrentLocation = $0 {
                         Logger.shared.log(.success, "user location is: \(userCurrentLocation)")
-                        forecastViewModel.getForecastData(latitude:  userCurrentLocation.coordinate.latitude, longitude: userCurrentLocation.coordinate.longitude)
+                        self.userCurrentLatitude = userCurrentLocation.coordinate.latitude
+                        self.userCurrentLongitude = userCurrentLocation.coordinate.longitude
+                        forecastViewModel.getForecastData(latitude:  self.userCurrentLatitude, longitude: self.userCurrentLongitude)
                     } else {
                         Logger.shared.log(.error, "user location cannot be accessible")
-                        forecastViewModel.getForecastData(latitude:  59.337239, longitude: 18.062381)
                     }
                 }
                 .onReceive(forecastViewModel.$isLoaded) {
                     self.isLoading = !$0
+                }
+                .onReceive(forecastViewModel.$hasError) {
+                    self.hasServiceError = $0
                 }
             }
         }
