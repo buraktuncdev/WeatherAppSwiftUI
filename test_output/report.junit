@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<testsuites name='WeatherAppSwiftUIUITests.xctest' tests='24' failures='0'>
+  <testsuite name='WeatherAppSwiftUITests.ForecastServiceTests' tests='10' failures='0'>
+    <testcase classname='WeatherAppSwiftUITests.ForecastServiceTests' name='test_GetAnimationIconName_Failure' time='0.002'/>
+    <testcase classname='WeatherAppSwiftUITests.ForecastServiceTests' name='test_GetAnimationIconName_Success' time='0.001'/>
+    <testcase classname='WeatherAppSwiftUITests.ForecastServiceTests' name='test_GetTemperatureAsCelcius_Failure' time='0.001'/>
+    <testcase classname='WeatherAppSwiftUITests.ForecastServiceTests' name='test_GetTemperatureAsCelcius_Success' time='0.001'/>
+    <testcase classname='WeatherAppSwiftUITests.ForecastServiceTests' name='test_GetTemperatureAsCelcius_WhenTempIsMinus' time='0.001'/>
+    <testcase classname='WeatherAppSwiftUITests.ForecastServiceTests' name='test_GetTemperatureAsCelciusWithoutSymbol_Failure' time='0.001'/>
+    <testcase classname='WeatherAppSwiftUITests.ForecastServiceTests' name='test_GetTemperatureAsCelciusWithoutSymbol_Success' time='0.001'/>
+    <testcase classname='WeatherAppSwiftUITests.ForecastServiceTests' name='test_GetTemperatureAsCelciusWithoutSymbol_WhenTempIsMinus' time='0.001'/>
+    <testcase classname='WeatherAppSwiftUITests.ForecastServiceTests' name='test_GetWeatherIconName_Failure' time='0.001'/>
+    <testcase classname='WeatherAppSwiftUITests.ForecastServiceTests' name='test_GetWeatherIconName_Success' time='0.001'/>
+  </testsuite>
+  <testsuite name='WeatherAppSwiftUITests.ForecastTests' tests='3' failures='0'>
+    <testcase classname='WeatherAppSwiftUITests.ForecastTests' name='test_Forecast_WhenDataProvided_CurrentSummaryShouldMatch' time='0.006'/>
+    <testcase classname='WeatherAppSwiftUITests.ForecastTests' name='test_Forecast_WhenDataProvided_HourlyDataShouldMatch' time='0.005'/>
+    <testcase classname='WeatherAppSwiftUITests.ForecastTests' name='test_Forecast_WhenDataProvided_TimezoneShouldMatch' time='0.003'/>
+  </testsuite>
+  <testsuite name='WeatherAppSwiftUITests.ForecastViewModelTests' tests='4' failures='0'>
+    <testcase classname='WeatherAppSwiftUITests.ForecastViewModelTests' name='test_FetchForecasts_HourlyForecastHours_Success' time='0.019'/>
+    <testcase classname='WeatherAppSwiftUITests.ForecastViewModelTests' name='test_FetchForecasts_HourlyIconsCount_DecodingFailure' time='0.001'/>
+    <testcase classname='WeatherAppSwiftUITests.ForecastViewModelTests' name='test_FetchForecasts_HourlyIconsCount_Success' time='0.022'/>
+    <testcase classname='WeatherAppSwiftUITests.ForecastViewModelTests' name='test_FetchForecasts_HourlyTemperatures_Success' time='0.016'/>
+  </testsuite>
+  <testsuite name='WeatherAppSwiftUIUITests.ForecastViewUITests' tests='5' failures='0'>
+    <testcase classname='WeatherAppSwiftUIUITests.ForecastViewUITests' name='test_ForecastView_HumidityTab_IsExists' time='8.703'/>
+    <testcase classname='WeatherAppSwiftUIUITests.ForecastViewUITests' name='test_ForecastView_VisibilityTab_IsExists' time='8.790'/>
+    <testcase classname='WeatherAppSwiftUIUITests.ForecastViewUITests' name='test_ForecastView_WindSpeedTab_IsExists' time='8.336'/>
+    <testcase classname='WeatherAppSwiftUIUITests.ForecastViewUITests' name='test_LocationPermissionCheck_NotAllowed_ToErrorView_IsButtonTitleExists' time='7.903'/>
+    <testcase classname='WeatherAppSwiftUIUITests.ForecastViewUITests' name='test_LocationPermissionCheck_NotAllowed_ToErrorView_IsErrorMessageExists' time='7.934'/>
+  </testsuite>
+  <testsuite name='WeatherAppSwiftUIUITests.WeatherAppSwiftUIUITestsLaunchTests' tests='2' failures='0'>
+    <testcase classname='WeatherAppSwiftUIUITests.WeatherAppSwiftUIUITestsLaunchTests' name='testLaunch' time='3.718'/>
+    <testcase classname='WeatherAppSwiftUIUITests.WeatherAppSwiftUIUITestsLaunchTests' name='testLaunch' time='3.768'/>
+  </testsuite>
+</testsuites>
