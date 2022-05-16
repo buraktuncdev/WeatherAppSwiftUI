@@ -9,12 +9,15 @@ import XCTest
 
 class ForecastViewUITests: XCTestCase {
 
+    let app = XCUIApplication()
+
     override func setUpWithError() throws {
         continueAfterFailure = false
+        app.launch()
     }
 
     func test_ForecastView_HumidityTab_IsExists() {
-        self.useLocationPermissionTestCaseHelper(elementToTap: 0, expectedTextOnScreen: "Humidity")
+        self.useLocationPermissionTestCaseHelper(elementToTap: 1, expectedTextOnScreen: "Humidity")
     }
 
     func test_ForecastView_WindSpeedTab_IsExists() {
@@ -35,7 +38,6 @@ class ForecastViewUITests: XCTestCase {
     }
 
     func useLocationPermissionTestCaseHelper(elementToTap: Int, expectedTextOnScreen: String) {
-      let app = XCUIApplication()
       app.resetAuthorizationStatus(for: .location)
       app.launch()
 
@@ -49,7 +51,7 @@ class ForecastViewUITests: XCTestCase {
       }
 
       app.tap()
-      wait(for: [exp], timeout: 7)
+      wait(for: [exp], timeout: 10)
 
         let expected = app.staticTexts[expectedTextOnScreen]
         XCTAssertTrue(expected.exists)

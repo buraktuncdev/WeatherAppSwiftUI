@@ -63,22 +63,21 @@ struct ForecastView: View {
                         }
                     }
                 }
-                .onReceive(locationViewModel.$userCurrentLocation) {
-                    if let userCurrentLocation = $0 {
-                        Logger.shared.log(.success, "user location is: \(userCurrentLocation)")
-                        self.userCurrentLatitude = userCurrentLocation.coordinate.latitude
-                        self.userCurrentLongitude = userCurrentLocation.coordinate.longitude
-                        forecastViewModel.getForecastData(latitude:  self.userCurrentLatitude, longitude: self.userCurrentLongitude)
-                    } else {
-                        Logger.shared.log(.error, "user location cannot be accessible")
-                    }
+            }.onReceive(locationViewModel.$userCurrentLocation) {
+                if let userCurrentLocation = $0 {
+                    Logger.shared.log(.success, "user location is: \(userCurrentLocation)")
+                    self.userCurrentLatitude = userCurrentLocation.coordinate.latitude
+                    self.userCurrentLongitude = userCurrentLocation.coordinate.longitude
+                    forecastViewModel.getForecastData(latitude:  self.userCurrentLatitude, longitude: self.userCurrentLongitude)
+                } else {
+                    Logger.shared.log(.error, "user location cannot be accessible")
                 }
-                .onReceive(forecastViewModel.$isLoaded) {
-                    self.isLoading = !$0
-                }
-                .onReceive(forecastViewModel.$hasError) {
-                    self.hasServiceError = $0
-                }
+            }
+            .onReceive(forecastViewModel.$isLoaded) {
+                self.isLoading = !$0
+            }
+            .onReceive(forecastViewModel.$hasError) {
+                self.hasServiceError = $0
             }
         }
     }
