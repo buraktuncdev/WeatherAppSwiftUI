@@ -11,7 +11,7 @@ import WeatherAppLogger
 struct ForecastView: View {
     
     @EnvironmentObject var locationViewModel: LocationViewModel
-    @ObservedObject var forecastViewModel: ForecastViewModel = ForecastViewModel()
+    @ObservedObject var forecastViewModel: ForecastViewModel = ForecastViewModel(forecastService: ForecastService())
     @State var isLoading = true
     @State var hasServiceError = false
     @State var userCurrentLatitude: Double = 0.0

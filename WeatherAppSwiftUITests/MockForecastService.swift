@@ -1,58 +1,24 @@
 //
-//  WeatherForecastService.swift
-//  WeatherAppSwiftUI
+//  MockForecastService.swift
+//  WeatherAppSwiftUITests
 //
-//  Created by Burak Tunc on 14.05.22.
+//  Created by Burak Tunc on 16.05.22.
 //
 
-import Foundation
+@testable import WeatherAppSwiftUI
 import WeatherAppNetwork
-import WeatherAppLogger
+import Foundation
 
-protocol ForecastServiceProtocol {
-    func fetchWeatherData(latitude: Double, longitude: Double, completion: @escaping (Result<Forecast, APIError>) -> Void)
-    func getWeatherIcon(iconName: String) -> String
-    func getAnimationName(iconName: String) -> String
-    func getTemperatureAsCelcius(temp: Double) -> String
-    func getTemperatureAsCelciusWithoutSymbol(temp: Double) -> String
-}
+final class MockForecastService: ForecastServiceProtocol {
 
-final class ForecastService: ForecastServiceProtocol {
-
-    private let apiManager: APIManager
-    private let apiPaths: APIPaths
-    private let apiHelper: APIHelper
-
-    init(apiManager: APIManager = APIManager(),
-         apiPaths: APIPaths = APIPaths(),
-         apiHelper: APIHelper = APIHelper()) {
-        self.apiManager = apiManager
-        self.apiPaths = apiPaths
-        self.apiHelper = apiHelper
-    }
+    var fetchWeatherMockResult: Result<Forecast, APIError>?
 
     func fetchWeatherData(latitude: Double, longitude: Double, completion: @escaping (Result<Forecast, APIError>) -> Void) {
-        guard let apiKey = Bundle.main.infoDictionary?[Constants.ForecastService.API_KEY] as? String else {
-            Logger.shared.log(.error, Constants.ForecastService.apiKeyNotFound)
-            return
-        }
-        let forecastURLString = apiPaths.createForecastURL(apiKey: apiKey, latitude: latitude, longitude: longitude)
-        let url = URL(string: forecastURLString)
-        guard let url = url else { return }
-        var urlRequest = URLRequest(url: url)
-        urlRequest = apiHelper.setRequestHeaders(request: &urlRequest, headers: Constants.ForecastService.contentTypeHeader)
-        urlRequest = apiHelper.setRequestHttpMethod(request: &urlRequest, httpMethod: .GET)
-        apiManager.callAPI(urlRequest: urlRequest, requestBody: nil, expectingReturnType: Forecast.self) { result in
-            switch result {
-            case .failure(let error):
-                Logger.shared.log(.error, error.localizedDescription)
-                completion(.failure(error))
-            case .success(let forecastData):
-                Logger.shared.log(.success, Constants.ForecastService.fetchSuccessfullMessage)
-                completion(.success(forecastData))
-            }
+        if let result = fetchWeatherMockResult {
+            completion(result)
         }
     }
+
 
     func getWeatherIcon(iconName: String) -> String {
         switch iconName {
@@ -104,5 +70,4 @@ final class ForecastService: ForecastServiceProtocol {
     func getTemperatureAsCelciusWithoutSymbol(temp: Double) -> String {
         return "\(String(format: "%0.0f", (temp - 32) / 1.8))º"
     }
-
 }
