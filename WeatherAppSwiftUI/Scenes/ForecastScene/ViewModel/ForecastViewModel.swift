@@ -27,6 +27,8 @@ final class ForecastViewModel: ObservableObject {
 
     @Published var currentTemperature: String = ""
     @Published var isLoaded = false
+    @Published var hasError = false
+    @Published var serviceErrorMessage: String = ""
 
     public init() {}
 
@@ -38,8 +40,10 @@ final class ForecastViewModel: ObservableObject {
                 switch result {
                 case .failure(let error):
                     Logger.shared.log(.error, error.localizedDescription)
-                    
+                    self.hasError = true
+                    self.serviceErrorMessage = error.localizedDescription
                 case .success(let forecastData):
+                    self.hasError = false
                     self.currentTime = DateFormatter.convertUnixToDayAndMonthString(time: forecastData.currently.time, timezone: forecastData.timezone)
                     self.todayWeatherAnimationIcon = self.getAnimationName(iconName: forecastData.currently.icon)
                     self.currentTemperature = self.getTemperatureAsCelcius(temp: forecastData.currently.temperature)
