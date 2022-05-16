@@ -23,8 +23,8 @@ class LocationViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
 
         super.init()
         locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.distanceFilter = 0.4
+        locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
+        locationManager.distanceFilter = 3000
         locationManager.startUpdatingLocation()
     }
 
