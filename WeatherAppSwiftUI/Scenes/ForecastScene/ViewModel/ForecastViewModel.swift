@@ -48,7 +48,6 @@ final class ForecastViewModel: ObservableObject {
                     self.windSpeed = String(format: "%.1f", forecastData.currently.windSpeed)
                     self.humidity = String(format: "%.0f%%", forecastData.currently.humidity * 100)
                     self.visibility = String(format: "%.1f%km", forecastData.currently.visibility)
-
                     self.setHourlyForecastsViewData(hourlyForecastDataArray: forecastData.hourly.data, timeZone: forecastData.timezone)
                 }
             }

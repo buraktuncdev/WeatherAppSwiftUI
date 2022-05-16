@@ -9,10 +9,10 @@ import SwiftUI
 import WeatherAppLogger
 
 struct ForecastView: View {
-
+    
     @EnvironmentObject var locationViewModel: LocationViewModel
     @ObservedObject var forecastViewModel: ForecastViewModel = ForecastViewModel()
-
+    
     var body: some View {
         NavigationView {
             ZStack {
@@ -20,7 +20,7 @@ struct ForecastView: View {
                     colors: [Color.yellow.opacity(0.6), Color.purple.opacity(0.4)]),
                                startPoint: .topLeading, endPoint: .bottomTrailing)
                 .edgesIgnoringSafeArea(.all)
-
+                
                 VStack(spacing: 10) {
                     TodayCardView(cityArea: locationViewModel.userCurrentPlacemark?.subAdministrativeArea ?? "",
                                   todayWeatherAnimation: forecastViewModel.todayWeatherAnimationIcon,
@@ -31,7 +31,7 @@ struct ForecastView: View {
                     ExtrasView(windSpeed: forecastViewModel.windSpeed,
                                humidity: forecastViewModel.humidity,
                                visibility: forecastViewModel.visibility)
-
+                    
                     Spacer()
                     VStack {
                         ScrollView(.horizontal, showsIndicators: false) {
@@ -48,7 +48,7 @@ struct ForecastView: View {
                     }
                     .padding(.bottom)
                 }
-
+                
             }
             .onReceive(locationViewModel.$userCurrentLocation) {
                 if let userCurrentLocation = $0 {
